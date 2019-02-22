@@ -107,6 +107,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user=User::find($id);
+        $user->posts->each->delete();
         $user->profile->delete(); //as user is related with profile..so at first we delete the profile and then the user cause if we delete user before deleting the profile the profile could not be found 
         $user->delete();
         Session::flash('info','the user is Successfully deleted');

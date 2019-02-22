@@ -12,7 +12,7 @@ class Post extends Model
     //this protected field allow us to insert those datas...without
     //this fillable field a MassAssignmentException is thorwn
 	protected $fillable = [
-        'title', 'content', 'featured', 'category_id','slug'
+        'title', 'content', 'featured', 'category_id','slug','user_id'
     ];
 
 
@@ -38,5 +38,9 @@ class Post extends Model
     {
         return $this->belongsToMany('App\Tag');
     }
-    //
+    
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

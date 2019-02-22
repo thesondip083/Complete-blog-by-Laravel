@@ -78,8 +78,10 @@ class ProfileController extends Controller
           'username'=>'required',
           'mail'=>'required|email',
           //'password'=>'required',
-          'youtube'=>'required|url',
-          'facebook'=>'required|url'
+          //'youtube'=>'required|url',
+          //'facebook'=>'required|url',
+          //'twitter'=>'required|url',
+          'about'=>'required',
        ]); 
 
        $user=Auth::user();
@@ -111,8 +113,21 @@ class ProfileController extends Controller
           $user->save();
        }
 
-       $user->profile->youtube=$request->youtube;
-       $user->profile->facebook=$request->facebook;
+        if($request->has('youtube'))
+       {
+          $user->profile->youtube=$request->youtube;
+       }
+       
+       if($request->has('facebook'))
+       {
+           $user->profile->facebook=$request->facebook;
+       }
+
+        if($request->has('twitter'))
+       {
+          $user->profile->twitter=$request->twitter;
+       }
+
        $user->profile->about=$request->about;
 
        $user->save();

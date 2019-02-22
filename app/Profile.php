@@ -12,7 +12,7 @@ class Profile extends Model
     }
 
     protected $fillable = [
-        'avatar', 'about','youtube','facebook','user_id'
+        'avatar', 'about','youtube','facebook','user_id','twitter'
     ];
 
     //must be added before passing data into DataBase

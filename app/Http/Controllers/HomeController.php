@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Post;
+use App\category;
+use App\Tag;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -26,6 +30,11 @@ class HomeController extends Controller
     {
         $user=Auth::user();
         $name=$user->name;
-        return view('home')->with('username',$name);
+        return view('home')->with('username',$name)
+                           ->with('totalpost',Post::all()->count())
+                           ->with('totalcat',category::all()->count())
+                           ->with('totaltag',Tag::all()->count())
+                           ->with('totaluser',User::all()->count())
+                           ->with('trashed',Post::onlyTrashed()->get()->count());
     }
 }

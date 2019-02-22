@@ -6,6 +6,7 @@ use App\category;
 use App\Tag;
 use Illuminate\Http\Request;
 use Session;
+use Auth; //for getting the id of authenticated user
 
 class PostController extends Controller
 {
@@ -94,6 +95,7 @@ class PostController extends Controller
       'content'=>$request->content,
      'featured'=>'uploads/posts/'.$feature_newname,
      'slug'=> str_slug($request->title),
+     'user_id'=>Auth::id(),
       ]);
 
       //check out Post.php 
@@ -189,15 +191,18 @@ class PostController extends Controller
          ]);
      //   dd($request->all());
 
+       
+      $posts=Post::find($id);
       if($request->hasFile('featured'))
       {//if the user upload a new image then we get the featured field to update image
       $feature_name=$request->featured;
       $new_feature_name=time().$feature_name->getClientOriginalName();
-      $feature_name->move('/uploads/posts',$new_feature_name);
+      $feature_name->move('uploads/posts',$new_feature_name);
       $posts->featured='uploads/posts/'.$new_feature_name;
+      $posts->save();
       }
 
-      $posts=Post::find($id);
+      
 
 
 

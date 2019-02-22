@@ -13,7 +13,7 @@ class SettingSeeder extends Seeder
     {
         Setting::create([
           'site_name'=>'Sondip\'s blog',
-          'address'=>'mirpur 2,Dhaka',
+          'address'=>'mirpur,Dhaka',
           'contact_mail'=>'sondippsingh@gmail.com',
           'contact_number'=>'01789350125',
         ]);

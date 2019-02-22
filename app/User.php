@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class User extends Authenticatable
@@ -29,10 +31,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+ /*  public function setPasswordAttribute($password){
+     $this->attributes['password'] = \Hash::make($password);
+   }
+*/
 
     public function profile() //one user has only one profile
     {
        return $this->hasOne('App\Profile');
     }
 
+   public function posts()
+   {
+     return $this->hasMany('App\Post');
+   }
 }

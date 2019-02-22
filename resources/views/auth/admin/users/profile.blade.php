@@ -27,7 +27,7 @@
 
     			<div class="form-group">
     				<label for="pass">New Password</label>
-    				<input type="password" id="pass" name="password" class="form-control">
+    				<input type="password" id="pass" name="password" class="form-control" placeholder="(optional)if you want to">
     			</div>
 
     			<div class="form-group">
@@ -45,6 +45,11 @@
     				<label for="fb">Facebook link</label>
     				<input type="text" id="fb" name="facebook" value="{{$user->profile->facebook}}" class="form-control">
     			</div>
+
+                <div class="form-group">
+                    <label for="fb">Twitter link</label>
+                    <input type="text" id="tw" name="twitter" value="{{$user->profile->twitter}}" class="form-control">
+                </div>
 
     			<div class="form-group">
     				<label for="you">About You</label>

@@ -1,8 +1,46 @@
 <?php
 
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+
+Route::post('/subscribe',function(){
+  $mail=request('mail');
+  Newsletter::subscribe($mail);
+  Session::flash('subscribed','Successfully subscribed!');
+  return redirect()->back();
+});
+
+
+Route::get('/',[
+'uses'=>'FrontendController@index',
+'as'=>'home'
+]);
+
+Route::get('/post/description/{slug?}/{id}',[
+  'uses'=>'FrontendController@description',
+  'as'=>'post.description'
+]);
+
+Route::get('/category/allpost/{id}',[
+   'uses'=>'FrontendController@allpost',
+   'as'=>'category.allpost'
+]);
+
+Route::get('/tag/allpost/{id}',[
+   'uses'=>'FrontendController@tagposts',
+   'as'=>'tag.allpost'
+]);
+
+
+Route::get('/search_result',function(){
+  $posts=App\Post::where('title','like', '%'.request('query').'%')->get();
+  return view('auth.results')->with('posts',$posts)
+                              ->with('catdata',\App\category::take(5)->get())
+                              ->with('tags',\App\Tag::all())
+                              ->with('setdata',\App\Setting::all()->first())
+                              ->with('query',request('query'));
 });
 
 Auth::routes();

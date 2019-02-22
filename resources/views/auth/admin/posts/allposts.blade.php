@@ -15,7 +15,7 @@
     		  @foreach($allposts as $ap)
                   <tr>
                   	
-                  	<td> <img src="{{$ap->featured}}" alt="{{$ap->title}}" width="50px" height="50px"></td>
+                  	<td> <img src="{{asset($ap->featured)}}" alt="{{$ap->title}}" width="50px" height="50px"></td>
 
                   	
 
